@@ -1,0 +1,70 @@
+<section class="content-header">
+    <h1>Documents</h1>
+</section>
+<section class="content body">
+    <div class="box box-primary">
+        <div class="box-body text-center">
+            <button class="btn btn-primary" ng-disabled="!ctrl.documents_links.prev" ng-click="ctrl.fetchDocuments(ctrl.documents_links.first.href)">
+                First
+            </button>
+            <button class="btn btn-primary" ng-disabled="!ctrl.documents_links.prev" ng-click="ctrl.fetchDocuments(ctrl.documents_links.prev.href)">
+                Prev
+            </button>
+            <button class="btn btn-primary" ng-disabled="!ctrl.documents_links.next" ng-click="ctrl.fetchDocuments(ctrl.documents_links.next.href)">
+                Next
+            </button>
+            <button class="btn btn-primary" ng-disabled="!ctrl.documents_links.next" ng-click="ctrl.fetchDocuments(ctrl.documents_links.last.href)">
+                Last
+            </button>
+
+            <div class="box-tools pull-right">
+                <input type="text" class="form-control" ng-model="ctrl.searchTerm" />
+            </div>
+        </div>
+
+        <div class="box-body no-padding">
+            <table class="table table-hover table-condensed">
+                <tbody>
+                <tr ng-repeat-start="doc in ctrl.documents"
+                    ng-class="{ 'danger': doc.deleted }"
+                    style="cursor: pointer;">
+                    <td class="col-xs-1">
+                        <input type="number" class="form-control" ng-model="doc.cluster" ng-change="ctrl.update(doc)">
+                    </td>
+                    <td ng-click="showText=!showText">{{ ::doc.title }}</td>
+                    <td><input type="checkbox" ng-model="doc.dataset1" ng-change="ctrl.toggle(doc, 'datset1')" /></td>
+                    <td><input type="checkbox" ng-model="doc.dataset2" ng-change="ctrl.toggle(doc, 'datset2')" /></td>
+                    <td><input type="checkbox" ng-model="doc.dataset3" ng-change="ctrl.toggle(doc, 'datset3')" /></td>
+                    <td class="text-right">
+                        <button class="btn btn-primary btn-xs" ng-click="ctrl.delete(doc)">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-repeat-end ng-show="showText">
+                    <td colspan="6"><textarea rows="15" class="form-control" ng-model="doc.text" ng-change="ctrl.update(doc)"></textarea></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="box-body text-center">
+            <button class="btn btn-primary" ng-disabled="!ctrl.documents_links.prev" ng-click="ctrl.fetchDocuments(ctrl.documents_links.first.href)">
+                First
+            </button>
+            <button class="btn btn-primary" ng-disabled="!ctrl.documents_links.prev" ng-click="ctrl.fetchDocuments(ctrl.documents_links.prev.href)">
+                Prev
+            </button>
+            <button class="btn btn-primary" ng-disabled="!ctrl.documents_links.next" ng-click="ctrl.fetchDocuments(ctrl.documents_links.next.href)">
+                Next
+            </button>
+            <button class="btn btn-primary" ng-disabled="!ctrl.documents_links.next" ng-click="ctrl.fetchDocuments(ctrl.documents_links.last.href)">
+                Last
+            </button>
+        </div>
+
+        <div class="overlay" ng-show="ctrl.isLoading">
+            <i class="fa fa-refresh fa-spin"></i>
+        </div>
+    </div>
+</section>
